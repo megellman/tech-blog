@@ -14,6 +14,9 @@
         &#127881 Tech Blog &#127881
       </h1>
       <div class="navbar">
+        {{#if logged_in}}
+        <button id="logout">Logout</button>
+        {{/if}}
         <a href="#" class="homepage"></a>
         <a href="#" class="dashbaord"></a>
       </div>
@@ -21,7 +24,10 @@
       <main class="container container-fluid mt-5">
         {{{ body }}}
       </main>
+    {{#if logged_in}}
+    <script src="/public/logout.js"
+    {{/if}}
   </div>
-  </body>
+</body>
 
 </html>
