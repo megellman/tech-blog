@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const { User } = require('../../models');
 
 // Create a new user
@@ -9,11 +10,13 @@ router.post('/', async (req, res) => {
             username: req.body.username,
             password: userPassword,
         });
+
         req.session.save(() => {
             req.session.loggedIn = true;
             res.status(200).json(userData);
         });
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 })
@@ -27,7 +30,7 @@ router.post('/login', async (req, res) => {
             },
         });
         if (!userData) {
-            res.status(404).json({ message: 'Incorrect email. Please try again!' });
+            res.status(404).json({ message: 'Incorrect username. Please try again!' });
             return;
         }
 
@@ -40,8 +43,10 @@ router.post('/login', async (req, res) => {
 
         req.session.save(() => {
             req.session.loggedIn = true;
+            req.session.username = userData.username;
+            res.session.id = userData.id
+            res.status(200).json({ user: userData, message: 'Logged in!' });
         })
-        res.status(200).json({ user: userData, message: 'Logged in!' });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -52,10 +57,11 @@ router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.status(204).end();
-            return;
         });
+    } else {
+     res.status(404).end();   
     }
-    res.status(404).end();
 });
+
 
 module.exports = router;

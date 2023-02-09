@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Tech Blog</title>
-  <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
       <h1>
-        &#127881 Tech Blog &#127881
+        Tech Blog
       </h1>
-      <div class="navbar">
-        {{#if logged_in}}
-        <button id="logout">Logout</button>
-        {{/if}}
-        <a href="#" class="homepage"></a>
-        <a href="#" class="dashbaord"></a>
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          {{#if loggedIn}}
+          <button id="logout">Logout</button>
+          {{else}}
+          <a class="navbar-brand" href="/login">Login</a>
+          {{/if}}
+          <a class="navbar-brand" href="/homepage" class="homepage">Homepage</a>
+          <a class="navbar-brand" href="/dashboard" class="dashbaord">Dashboard</a>
+        </div>
+      </nav>
     </header>
-      <main class="container container-fluid mt-5">
-        {{{ body }}}
-      </main>
-    {{#if logged_in}}
-    <script src="/public/logout.js"
+    <main class="container container-fluid mt-5">
+      {{{ body }}}
+    </main>
+    {{#if loggedIn}}
+    <script src="/public/js/logout.js"></script>
     {{/if}}
   </div>
 </body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </html>

@@ -13,7 +13,6 @@ Comment.init(
         },
         creator_username: {
             type: DataTypes.STRING,
-            allowNull: false,
             references: {
                 model: 'user',
                 key: 'username',
