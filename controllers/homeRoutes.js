@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const { Blog } = require('../models');
 
 // GET all blog posts for homepage
