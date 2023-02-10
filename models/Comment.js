@@ -18,9 +18,14 @@ Comment.init(
                 key: 'username',
             }
         },
-        date_created: {
-            type: DataTypes.DATE,
+         content: {
+            type: DataTypes.STRING,
             allowNull: false,
+        },
+        date_created: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
         blog_id: {
             type: DataTypes.INTEGER,

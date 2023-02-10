@@ -1,6 +1,5 @@
 const blogForm = async (e) => {
     e.preventDefault();
-    console.log('HELLO')
 
     const post_title = document.querySelector('#title').value.trim();
     const contents = document.querySelector('#content').value.trim();

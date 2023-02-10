@@ -1,14 +1,14 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
 
+
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body.title )
         const blogData = await Blog.create({
-            post_title: req.body.title,
+            post_title: req.body.post_title,
             contents: req.body.contents,
             creator_username: req.session.username,
-            user_id: req.session.id,
+            user_id: req.session.userId,
         });
 
         if (!blogData) {

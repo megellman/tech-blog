@@ -13,6 +13,8 @@ router.post('/', async (req, res) => {
 
         req.session.save(() => {
             req.session.loggedIn = true;
+            req.session.username = req.body.username;
+            req.session.userId = userData.id;
             res.status(204).json(userData);
         });
     } catch (err) {
@@ -33,21 +35,22 @@ router.post('/login', async (req, res) => {
             res.status(404).json({ message: 'Incorrect username. Please try again!' });
             return;
         }
-
+        
         const validPassword = await userData.checkPassword(req.body.password);
-
+        
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
-
+        
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.username = userData.username;
-            res.session.id = userData.id
+            req.session.userId = userData.id;
             res.status(200).json({ user: userData, message: 'Logged in!' });
         })
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 })

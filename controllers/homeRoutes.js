@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Blog } = require('../models');
-const { User } = require('../models');
+
+const withAuth = require('../utils/auth');
 
 // GET all blog posts for homepage
 router.get('/', async (req, res) => {
@@ -17,11 +18,11 @@ router.get('/', async (req, res) => {
 });
 
 // GET all blog posts from user for dashboard
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.findAll({
             where: {
-                user_id: req.session.id,
+                user_id: req.session.userId,
             },
         });
         if (!blogData) {
@@ -50,6 +51,22 @@ router.get('/login', (req, res) => {
 
     res.render('login');
 });
+
+router.get('/homepage/:id', async (req, res) => {
+    try {
+        const singleBlogData = await Blog.findByPk(req.params.id);
+        const comment = singleBlogData.get({ plain: true });
+        res.render('blog', {
+            comment,
+            loggedIn: req.session.loggedIn,
+        });
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    };
+})
+
+
 
 router.get('/blog', (req, res) => {
     res.render('blogCreate');
