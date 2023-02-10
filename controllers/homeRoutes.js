@@ -19,23 +19,23 @@ router.get('/', async (req, res) => {
 // GET all blog posts from user for dashboard
 router.get('/dashboard', async (req, res) => {
     try {
-        const blogData = await User.findByPk(req.session.id, {
-            include: [
-                {
-                    model: Blog,
-                    attributes: [
-                        'post_title',
-                        'contents',
-                        'date_created',
-                    ]
-                }
-            ]
+        console.log('i\'m here')
+        const blogData = await Blog.findAll({
+            where: {
+                user_id: req.session.id,
+            },
         });
+        console.log(`blog data is ${blogData}`);
+        if (!blogData) {
+            res.render('dashboard', { loggedIn: req.session.loggedIn });
+            return;
+        }
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
         res.render('dashboard', {
             blogs,
             loggedIn: req.session.loggedIn,
         });
+
     } catch (err) {
         res.status(500).json(err);
     };
@@ -45,7 +45,7 @@ router.get('/dashboard', async (req, res) => {
 // Login 
 router.get('/login', (req, res) => {
     // If user has already logged in, then they are redirected to the homepage
-    if(req.session.loggedIn){
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
