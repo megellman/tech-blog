@@ -3,7 +3,6 @@ const { Comment } = require('../../models');
 
 router.post('/:id', async (req, res) => {
     try {
-        console.log('************HELLO')
         const commentData = await Comment.create({
             creator_username: req.session.username,
             content: req.body.content,

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog } = require('../models');
+const { Blog, Comment } = require('../models');
 
 const withAuth = require('../utils/auth');
 
@@ -52,9 +52,11 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+// Renders a single blog post to page
 router.get('/homepage/:id', async (req, res) => {
     try {
-        const singleBlogData = await Blog.findByPk(req.params.id);
+        const singleBlogData = await Blog.findByPk(req.params.id, { include: [{ model: Comment,
+        attributes: ['creator_username', 'content'], }] });
         const comment = singleBlogData.get({ plain: true });
         res.render('blog', {
             comment,
@@ -67,7 +69,7 @@ router.get('/homepage/:id', async (req, res) => {
 })
 
 
-
+// Renders blog form to page
 router.get('/blog', (req, res) => {
     res.render('blogCreate');
 });
