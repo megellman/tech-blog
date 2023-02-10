@@ -1,12 +1,14 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
-const withAuth = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
+        console.log(req.body.title )
         const blogData = await Blog.create({
-            title: req.body.title,
+            post_title: req.body.title,
             contents: req.body.contents,
+            creator_username: req.session.username,
+            user_id: req.session.id,
         });
 
         if (!blogData) {
@@ -19,6 +21,7 @@ router.post('/', withAuth, async (req, res) => {
         res.render('dashboard', { blog });
 
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });
