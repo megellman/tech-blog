@@ -19,13 +19,11 @@ router.get('/', async (req, res) => {
 // GET all blog posts from user for dashboard
 router.get('/dashboard', async (req, res) => {
     try {
-        console.log('i\'m here')
         const blogData = await Blog.findAll({
             where: {
                 user_id: req.session.id,
             },
         });
-        console.log(`blog data is ${blogData}`);
         if (!blogData) {
             res.render('dashboard', { loggedIn: req.session.loggedIn });
             return;
@@ -51,6 +49,10 @@ router.get('/login', (req, res) => {
     }
 
     res.render('login');
+});
+
+router.get('/blog', (req, res) => {
+    res.render('blogCreate');
 });
 
 module.exports = router;

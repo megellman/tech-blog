@@ -1,11 +1,12 @@
 <section class="container">
 <section class="flex-row justify-center">
-    {{log blogs}}
     {{#each blogs}}
     {{>blog-details}}
     {{/each}}
-</section>   
+</section> 
 <div>
-    <button>Create Blog</button>
+    <button class="blog-create">Create Blog</button>
 </div> 
 </section>
+
+<script src="/js/blogCreate.js"></script>
