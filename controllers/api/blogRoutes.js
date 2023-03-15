@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // Creates a blog post
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.create({
             post_title: req.body.post_title,
@@ -25,5 +26,5 @@ router.post('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
-
+Date
 module.exports = router;
