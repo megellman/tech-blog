@@ -26,5 +26,29 @@ router.post('/', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
-Date
+
+
+router.put('/update/:id', withAuth, async (req, res) => {
+    console.log('##################')
+    try {
+        const { post_title, contents } = req.body.updates;
+
+        const blog = await Blog.update({
+            post_title,
+            contents
+        }, {
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        if (!blog[0]) {
+            res.status(404).json({ message: 'No blog found with this id!' });
+            return;
+        }
+        res.status(200).json(blog);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 module.exports = router;

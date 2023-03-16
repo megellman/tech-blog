@@ -5,7 +5,7 @@ const blogForm = async (e) => {
     const contents = document.querySelector('#content').value.trim();
 
     if(post_title && contents){
-        const response = await fetch('/api/blog', {
+        const response = await fetch('/api/blog/', {
             method: 'POST',
             body: JSON.stringify({post_title, contents}),
             headers: {'Content-Type': 'application/json'},
@@ -13,7 +13,7 @@ const blogForm = async (e) => {
         if(response.ok){
             document.location.replace('/dashboard');
         } else {
-            alert('Failed to create blog');
+            alert('Failed to update blog');
         }
     }
 };

@@ -99,9 +99,29 @@ router.get('/homepage/:id', withAuth, async (req, res) => {
 })
 
 
-// Renders blog form to page
-router.get('/blog', withAuth, (req, res) => {
-    res.render('blogCreate');
+// // Renders blog form to page
+// router.get('/blog', withAuth, (req, res) => {
+//     res.render('blogCreate');
+// });
+
+// Render create blog form
+router.get("/blog", withAuth, async (req, res) => {
+    console.log('CREATE REQ SEEN')
+    res.render("blogCreate", {
+        loggedIn: req.session.loggedIn
+    });
 });
+
+// Render update blog form
+router.get("/blog/update/:id", withAuth, async (req, res) => {
+    console.log('UPDATE REQ SEEN')
+    const blogData = await Blog.findByPk(req.params.id);
+    const blog = blogData.get({ plain: true });
+
+    res.render("blogUpdate", {
+        loggedIn: req.session.loggedIn,
+        blog
+    })
+})
 
 module.exports = router;

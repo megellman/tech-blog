@@ -10,7 +10,6 @@ router.post('/:id', withAuth, async (req, res) => {
             blog_id: req.params.id,
             user_id: req.session.userId,
         });
-        console.log('##############success!')
 res.status(200).json(commentData)
     } catch (err) {
         console.log(err);
