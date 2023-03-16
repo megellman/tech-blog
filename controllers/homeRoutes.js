@@ -55,13 +55,6 @@ router.get('/login', (req, res) => {
 // Renders a single blog post to page
 router.get('/homepage/:id', withAuth, async (req, res) => {
     try {
-        // const singleBlogData = await Blog.findByPk(req.params.id, { include: [{ model: Comment,
-        //     attributes: ['creator_username', 'content'] }] });
-        //     const comment = singleBlogData.get({ plain: true });
-        //     res.render('blog', {
-        //         comment,
-        //         loggedIn: req.session.loggedIn,
-        // });
         const singleBlogData = await Blog.findOne({
             where: {
                 id: req.params.id,
@@ -97,12 +90,6 @@ router.get('/homepage/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     };
 })
-
-
-// // Renders blog form to page
-// router.get('/blog', withAuth, (req, res) => {
-//     res.render('blogCreate');
-// });
 
 // Render create blog form
 router.get("/blog", withAuth, async (req, res) => {

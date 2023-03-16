@@ -1,3 +1,4 @@
+// form that submits blog info to update
 const blogForm = async (e) => {
     e.preventDefault();
 

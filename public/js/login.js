@@ -1,3 +1,4 @@
+// login and sign up forms
 const loginForm = async (e) => {
     e.preventDefault();
 

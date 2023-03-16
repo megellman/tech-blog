@@ -1,3 +1,4 @@
+// submits blog info to create
 const blogForm = async (e) => {
     e.preventDefault();
 

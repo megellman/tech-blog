@@ -1,3 +1,4 @@
+//renders update form when button clicked
 const getFormUpdatePage = () => {
     let update = true;
     let id = document.location.href.split('/').pop();

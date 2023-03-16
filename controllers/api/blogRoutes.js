@@ -27,7 +27,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-
+// update a comment
 router.put('/update/:id', withAuth, async (req, res) => {
     try {
         const { post_title, contents } = req.body.updates;

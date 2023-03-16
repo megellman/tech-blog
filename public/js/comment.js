@@ -1,3 +1,4 @@
+//renders comment form when clicked
 const getCommentForm = () => {
     document.location.replace('/blog');
 }

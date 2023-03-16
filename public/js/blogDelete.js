@@ -1,4 +1,4 @@
-// Delete Blog Button
+// deletes blog
 const deleteBlog = async (event) => {
     const id = window.location.href.split('/').pop();
         const response = await fetch(`/api/blog/${id}`, {

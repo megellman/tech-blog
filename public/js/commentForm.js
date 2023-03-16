@@ -1,3 +1,5 @@
+//submits comment info to create
+
 const commentForm = async (e) => {
     e.preventDefault();
    
