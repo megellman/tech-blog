@@ -67,7 +67,31 @@ router.get('/homepage/:id', withAuth, async (req, res) => {
                 id: req.params.id,
             }
         })
-        
+        if(!singleBlogData){
+            res.status(404).json({message: "Blog not found"});
+            return;
+        }
+        const blog = singleBlogData.get({plain: true});
+
+        const commentData = await Comment.findAll({
+            where: {
+                blog_id: req.params.id
+            }
+        });
+        if (commentData) {
+            const comments = commentData.map((comment) => comment.get({ plain: true }));
+            
+            res.status(200).render("blog", {
+                blog,
+                comments,
+                loggedIn: req.session.loggedIn,
+            });
+        } else {
+            res.status(200).render("journal", {
+                blog,
+                loggedIn: req.session.loggedIn,
+            });
+        }
     } catch (err) {
         console.log(err)
         res.status(500).json(err);

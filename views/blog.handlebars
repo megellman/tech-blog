@@ -1,8 +1,19 @@
 <section class="card">
-    <h1>{{comment.post_title}}</h1>
-    <p>{{comment.contents}}</p>
-    <p>Created By: {{comment.creator_username}}</p>
-    <p>Date Created: {{comment.date_created}}</p>
+    <h1>{{blog.post_title}}</h1>
+    <p>{{blog.contents}}</p>
+    <p>Created By: {{blog.creator_username}}</p>
+    <p>Date Created: {{blog.date_created}}</p>
+    {{#if comments}}
+        {{#each comments}}
+            <div class="comment">
+                <p>Username: {{creator_username}}</p>
+                <p>Posted: {{date_created}}</p>
+                <p>{{content}}</p>
+            </div>
+        {{/each}}
+    {{else}}
+    <p>No comments yet.</p>
+    {{/if}}
     <form class="comment-form">
         <div>
             <label for="Comment">Comment:</label>

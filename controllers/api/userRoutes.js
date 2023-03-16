@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
         req.session.save(() => {
           req.session.userId = id;
           req.session.loggedIn = true;
-    
+          req.session.username = userData.username;
           res.status(200).redirect("/");
         });
     } catch (err) {
