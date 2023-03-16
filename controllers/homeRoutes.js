@@ -106,7 +106,6 @@ router.get('/homepage/:id', withAuth, async (req, res) => {
 
 // Render create blog form
 router.get("/blog", withAuth, async (req, res) => {
-    console.log('CREATE REQ SEEN')
     res.render("blogCreate", {
         loggedIn: req.session.loggedIn
     });
@@ -114,7 +113,6 @@ router.get("/blog", withAuth, async (req, res) => {
 
 // Render update blog form
 router.get("/blog/update/:id", withAuth, async (req, res) => {
-    console.log('UPDATE REQ SEEN')
     const blogData = await Blog.findByPk(req.params.id);
     const blog = blogData.get({ plain: true });
 

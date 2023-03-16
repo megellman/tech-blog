@@ -4,7 +4,6 @@ const commentForm = async (e) => {
 
     const content = document.querySelector('#comment').value.trim();
     const id = window.location.href.split('/').pop();
-    console.log(id);
 
     if(content){
         const response = await fetch(`/api/comment/${id}`, {
