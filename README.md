@@ -15,6 +15,8 @@
 ## Description
 
 [Visit the Deployed Site](https://tech-blog-platform.herokuapp.com/)
+
+![homepage](public/css/homepage.png)
     
 This project is a blog hosting site where people can view and interact with other other blog posts. People can comment on other's blog posts as well as create their own. If a user selects the dashboard from the navbar, then they can see all of the blog posts that they have created. They also have the option to create their own. 
 
@@ -58,6 +60,8 @@ router.post('/', async (req, res) => {
 })
 ```
 Here I created a route to create a new instance of a user. When a user fills out the signup form and clicks the submit button, the user's information is collected on the client side and then sent to the backend here where the post route is run. Here bcrypt encrypts the password and that and the username are saved to the userData variable. 
+
+![login](./public/css/login.png)
 
 ## Usage
   
